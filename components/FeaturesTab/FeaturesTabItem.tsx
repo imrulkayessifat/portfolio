@@ -15,14 +15,14 @@ const FeaturesTabItem = ({ featureTab }: { featureTab: FeatureTab }) => {
             <div className="flex flex-col  ">
               {desc1?.map((data, key) => (
 
-                <p className="m-5  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold py-2 px-4 border border-blue-500 cursor-not-allowed rounded">{data}</p>
+                <p key={key} className="m-5  bg-transparent hover:bg-blue-500 text-blue-700 font-semibold py-2 px-4 border border-blue-500 cursor-not-allowed rounded">{data}</p>
 
               ))}
             </div>
             <div className="flex flex-col">
               {desc2?.map((data, key) => (
 
-                <p className="m-5 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold py-2 px-4 border border-blue-500 cursor-not-allowed rounded">{data}</p>
+                <p key={key} className="m-5 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold py-2 px-4 border border-blue-500 cursor-not-allowed rounded">{data}</p>
 
               ))}
             </div>
