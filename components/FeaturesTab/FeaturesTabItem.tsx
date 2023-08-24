@@ -29,13 +29,7 @@ const FeaturesTabItem = ({ featureTab }: { featureTab: FeatureTab }) => {
           </div>
         </div>
         <div className="hidden md:block md:w-1/2 relative mx-auto aspect-[562/366] max-w-[550px]">
-          {/* <Image src={image} alt={title} fill className="dark:hidden" />
-          <Image
-            src={imageDark}
-            alt={title}
-            fill
-            className="hidden dark:block"
-          /> */}
+          
           <div className="relative 2xl:-mr-7.5">
             <Image
               src="/images/shape/shape-01.png"

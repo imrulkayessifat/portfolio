@@ -32,7 +32,7 @@ const Contact = () => {
 
   return (
     <>
-      {/* <!-- ===== Contact Start ===== --> */}
+      
       <section id="about" className="px-4 md:px-8 2xl:px-0">
         <div className="mx-auto max-w-c-1390 relative pt-10 lg:pt-15 xl:pt-20 px-7.5 lg:px-15 xl:px-20 overflow-hidden">
           <div className="absolute -z-1 rounded-lg left-0 top-0 w-full h-2/3 bg-gradient-to-t from-[#fff] to-[#dee7ff47] dark:bg-gradient-to-t dark:from-[#24283E] dark:to-[#252A42]"></div>
@@ -132,7 +132,7 @@ const Contact = () => {
           </div>
         </div>
       </section>
-      {/* <!-- ===== Contact End ===== --> */}
+     
     </>
   );
 };

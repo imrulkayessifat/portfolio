@@ -13,7 +13,7 @@ const SectionHeader = ({ headerInfo }: { headerInfo: HeaderInfo }) => {
 
   return (
     <>
-      {/* <!-- Section Title Start --> */}
+      
       <motion.div
         variants={{
           hidden: {
@@ -42,7 +42,7 @@ const SectionHeader = ({ headerInfo }: { headerInfo: HeaderInfo }) => {
         </h2>
         <p className="mx-auto md:w-4/5 lg:w-3/5 xl:w-[46%]">{description}</p>
       </motion.div>
-      {/* <!-- Section Title End --> */}
+      
     </>
   );
 };

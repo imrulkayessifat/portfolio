@@ -14,7 +14,7 @@ const Header = () => {
 
   const pathUrl = usePathname();
 
-  // Sticky menu
+
   const handleStickyMenu = () => {
     if (window.scrollY >= 80) {
       setStickyMenu(true);
@@ -53,7 +53,7 @@ const Header = () => {
             />
           </a>
 
-          {/* <!-- Hamburger Toggle BTN --> */}
+        
           <button
             aria-label="hamburger Toggler"
             className="lg:hidden block"
@@ -86,10 +86,10 @@ const Header = () => {
               </span>
             </span>
           </button>
-          {/* <!-- Hamburger Toggle BTN --> */}
+          
         </div>
 
-        {/* Nav Menu Start   */}
+      
         <div
           className={`w-full lg:w-full h-0 lg:h-auto invisible lg:visible lg:flex items-center justify-between ${navigationOpen &&
             "!visible bg-white dark:bg-blacksection shadow-solid-5 h-auto max-h-[400px] overflow-y-scroll rounded-md mt-4 p-7.5"
@@ -167,6 +167,6 @@ const Header = () => {
   );
 };
 
-// w-full delay-300
+
 
 export default Header;
