@@ -1,30 +1,31 @@
 "use client";
 
 import '../globals.css'
-import { Inter } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import Header from '@/components/Header';
 import Lines from '@/components/Lines';
 import ScrollToTop from '@/components/ScrollToTop';
 import Footer from '@/components/Footer';
-import ChatBot from 'react-simple-chatbot';
+// import ChatBot from 'react-simple-chatbot';
+const ChatBot =dynamic(() => import("react-simple-chatbot").then(mod => mod.default),{ssr:false});
+
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 
 interface FileWithPreview extends File {
   preview: string;
 }
 
+import { useDropzone } from 'react-dropzone';
 
-import {useDropzone} from 'react-dropzone';
-
-const thumbsContainer:React.CSSProperties = {
+const thumbsContainer: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'wrap',
   marginTop: 16
 };
 
-const thumb:React.CSSProperties = {
+const thumb: React.CSSProperties = {
   display: 'inline-flex',
   borderRadius: 2,
   border: '1px solid #eaeaea',
@@ -36,7 +37,7 @@ const thumb:React.CSSProperties = {
   boxSizing: 'border-box'
 };
 
-const thumbInner:React.CSSProperties = {
+const thumbInner: React.CSSProperties = {
   display: 'flex',
   minWidth: 0,
   overflow: 'hidden'
@@ -51,7 +52,7 @@ const img = {
 
 function Previews(props: any) {
   const [files, setFiles] = useState<FileWithPreview[]>([]);
-  const {getRootProps, getInputProps} = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     accept: {
       'image/*': []
     },
@@ -61,7 +62,7 @@ function Previews(props: any) {
       })));
     }
   });
-  
+
   const thumbs = files.map(file => (
     <div style={thumb} key={file.name}>
       <div style={thumbInner}>
@@ -80,9 +81,9 @@ function Previews(props: any) {
 
   return (
     <section className="container">
-      <div {...getRootProps({className: 'dropzone'})}>
+      <div {...getRootProps({ className: 'dropzone' })}>
         <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        <p>Drag &apos;n&apos; drop some files here, or click to select files</p>
       </div>
       <aside style={thumbsContainer}>
         {thumbs}
@@ -97,11 +98,11 @@ const config = {
 };
 
 export default function RootLayout({
-  children,
+  children
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
 }) {
-  const [files, setFiles] = useState([])
+
   return (
     <html lang="eng">
       <body className={`dark:bg-black`}>
