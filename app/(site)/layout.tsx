@@ -6,17 +6,31 @@ import Header from '@/components/Header';
 import Lines from '@/components/Lines';
 import ScrollToTop from '@/components/ScrollToTop';
 import Footer from '@/components/Footer';
-// import ChatBot from 'react-simple-chatbot';
-const ChatBot =dynamic(() => import("react-simple-chatbot").then(mod => mod.default),{ssr:false});
-
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+
+
+interface OriginalComponentProps {
+  botAvatar: string;
+  floating: boolean;
+  headerTitle: string;
+  recognitionEnable: boolean;
+  steps: ({ id: string; message: string; trigger: string; } |
+  { id: string; user: boolean; trigger: string; } |
+  { id: string; options: { value: string; label: string; trigger: string; }[]; } |
+  { id: string; component: JSX.Element; } |
+  { id: string; message: string; end: boolean; }
+  )[];
+}
+
+const ChatBot = dynamic<OriginalComponentProps>(() => import("react-simple-chatbot").then(mod => mod.default), { ssr: false });
 
 interface FileWithPreview extends File {
   preview: string;
 }
 
 import { useDropzone } from 'react-dropzone';
+import Image from 'next/image';
 
 const thumbsContainer: React.CSSProperties = {
   display: 'flex',
@@ -66,18 +80,17 @@ function Previews(props: any) {
   const thumbs = files.map(file => (
     <div style={thumb} key={file.name}>
       <div style={thumbInner}>
-        <img
+        <Image
           src={file.preview}
           style={img}
-          onLoad={() => { URL.revokeObjectURL(file.preview) }}
-        />
+          onLoad={() => { URL.revokeObjectURL(file.preview); } } alt={''}        />
       </div>
     </div>
   ));
 
   useEffect(() => {
     return () => files.forEach(file => URL.revokeObjectURL(file.preview));
-  }, []);
+  }, [files]);
 
   return (
     <section className="container">
