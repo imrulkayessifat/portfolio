@@ -4,8 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 .testimonial-01 .swiper-pagination-bullet {
   @apply w-2.5 h-2.5 bg-stroke opacity-100;
 }

@@ -46,8 +46,8 @@ const About = () => {
                   disableOnInteraction: false,
                 }}
                 slidesPerView={1}
-                onSwiper={(swiper) => console.log(swiper)}
-                onSlideChange={() => console.log('slide change')}
+                onSwiper={(swiper) => ''}
+                onSlideChange={() => ''}
               >
                 {wellteamData.map((data, key) => (
                   <SwiperSlide key={data.id}>
@@ -132,7 +132,7 @@ const About = () => {
 
       <section>
         <div className="mx-auto max-w-c-1235 px-4 md:px-8 2xl:px-0 overflow-hidden">
-          <div className="flex items-center gap-8 lg:gap-32.5">
+          <div className="flex items-center flex-col sm:flex-row gap-8 lg:gap-32.5">
             <motion.div
               variants={{
                 hidden: {
@@ -204,8 +204,8 @@ const About = () => {
                   disableOnInteraction: false,
                 }}
                 slidesPerView={1}
-                onSwiper={(swiper) => console.log(swiper)}
-                onSlideChange={() => console.log('slide change')}
+                onSwiper={(swiper) => ''}
+                onSlideChange={() => ''}
               >
                 {nemcData.map((data, key) => (
                   <SwiperSlide key={data.id}>

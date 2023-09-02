@@ -8,6 +8,7 @@ import ScrollToTop from '@/components/ScrollToTop';
 import Footer from '@/components/Footer';
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import axios from 'axios';
 
 
 interface OriginalComponentProps {
@@ -57,40 +58,52 @@ const thumbInner: React.CSSProperties = {
   overflow: 'hidden'
 };
 
-const img = {
-  display: 'block',
-  width: 'auto',
-  height: '100%'
-};
-
-
 function Previews(props: any) {
   const [files, setFiles] = useState<FileWithPreview[]>([]);
+  const [responseImage, setResponseImage] = useState<string | null>(null);
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       'image/*': []
     },
-    onDrop: acceptedFiles => {
+    onDrop: async (acceptedFiles) => {
       setFiles(acceptedFiles.map(file => Object.assign(file, {
         preview: URL.createObjectURL(file)
       })));
+
+      const formData = new FormData();
+      formData.append('image', acceptedFiles[0]);
+      try {
+        const response = await axios.post('http://127.0.0.1:5000/detect', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          responseType: 'blob'
+        });
+        setResponseImage(URL.createObjectURL(response.data));
+      } catch (error) {
+      }
     }
   });
-
   const thumbs = files.map(file => (
     <div style={thumb} key={file.name}>
-      <div style={thumbInner}>
+      <div className='flex justify-between' style={thumbInner}>
         <Image
           src={file.preview}
-          style={img}
-          onLoad={() => { URL.revokeObjectURL(file.preview); } } alt={''}        />
+          width="100"
+          height="100"
+          onLoad={() => { URL.revokeObjectURL(file.preview); }} alt={''} />
       </div>
     </div>
   ));
 
   useEffect(() => {
-    return () => files.forEach(file => URL.revokeObjectURL(file.preview));
-  }, [files]);
+    return () => {
+      files.forEach(file => URL.revokeObjectURL(file.preview));
+      if (responseImage) {
+        URL.revokeObjectURL(responseImage);
+      }
+    };
+  }, [files, responseImage]);
 
   return (
     <section className="container">
@@ -101,6 +114,12 @@ function Previews(props: any) {
       <aside style={thumbsContainer}>
         {thumbs}
       </aside>
+      {responseImage && (
+        <div>
+          <h2>Processed Image</h2>
+          <Image src={responseImage} alt="Processed" width="100" height="100" />
+        </div>
+      )}
     </section>
   );
 }
@@ -175,7 +194,6 @@ export default function RootLayout({
                 component: (
                   <Previews />
                 ),
-
               },
               {
                 id: 'end-message',
