@@ -25,7 +25,7 @@
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
     "react-filepond": "^7.1.2",
-    "react-simple-chatbot": "^0.6.1",
+    "react-simple-chatbot": "^0.5.0",
     "slider-moon": "^1.0.3",
     "swiper": "^9.4.1",
     "tailwindcss": "3.3.3",
